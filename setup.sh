@@ -47,12 +47,15 @@ echo "*******************************"
 echo "***** INSTALLING PACKAGES *****"
 echo "*******************************"
 
-apt-get install -yq openjdk-8-jdk git gpg maven nodejs
+apt-get install -yq openjdk-8-jdk
+apt-get install -yq git gpg maven nodejs
 
 echo "**************************************"
 echo "***** VERIFYING PACKAGE VERSIONS *****"
 echo "**************************************"
 
+echo "- JDK -"
+readlink -f $(which java)
 echo "- NPM -"
 npm --version
 
@@ -63,3 +66,4 @@ echo "***** INSTALLING ANGULAR CLI *****"
 echo "**********************************"
 
 npm install -g @angular/cli
+
