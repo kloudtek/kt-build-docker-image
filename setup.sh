@@ -67,3 +67,8 @@ echo "**********************************"
 
 npm install -g @angular/cli
 
+echo "***************************"
+echo "***** DELETING SCRIPT *****"
+echo "***************************"
+
+rm -f /sbin/setup-image
