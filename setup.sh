@@ -67,6 +67,12 @@ echo "**********************************"
 
 npm install -g @angular/cli
 
+echo "**************************************"
+echo "***** INSTALLING OTHER NPM UTILS *****"
+echo "**************************************"
+
+npm install -g npm-login-noninteractive
+
 echo "***************************"
 echo "***** DELETING SCRIPT *****"
 echo "***************************"
