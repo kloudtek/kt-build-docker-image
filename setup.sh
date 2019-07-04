@@ -48,7 +48,7 @@ echo "***** INSTALLING PACKAGES *****"
 echo "*******************************"
 
 apt-get install -yq openjdk-8-jdk
-apt-get install -yq git gpg maven nodejs
+apt-get install -yq git gpg maven nodejs jq
 
 echo "**************************************"
 echo "***** VERIFYING PACKAGE VERSIONS *****"
@@ -66,12 +66,6 @@ echo "***** INSTALLING ANGULAR CLI *****"
 echo "**********************************"
 
 npm install -g @angular/cli
-
-echo "**************************************"
-echo "***** INSTALLING OTHER NPM UTILS *****"
-echo "**************************************"
-
-npm install -g npm-login-noninteractive
 
 echo "***************************"
 echo "***** DELETING SCRIPT *****"
