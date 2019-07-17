@@ -25,7 +25,7 @@ npmLogin() {
         echo "Retrieved access token for npm registry: ${registry}"
     fi
     if [[ -n "${token}" ]]; then
-        local reg=$(echo "${registry}" | sed "s/^http:/:/" | sed "s/^https://")
+        local reg=$(echo "${registry}" | sed "s/^http://" | sed "s/^https://")
         if [[ -n "${scope}" ]]; then
             echo >>~/.npmrc "${scope}:registry=${registry}"
         echo "Added scope ${scope} for npm registry: ${registry}"
