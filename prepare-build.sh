@@ -3,7 +3,6 @@
 echo "Preparing build"
 
 if [[ -n "${PGP_KEY}" ]]; then
- echo Adding pgp key
  TMPFILE=$(mktemp)
  echo >${TMPFILE} "${PGP_KEY}"
  if [[ -n ${PGP_PASS} ]]; then
@@ -11,6 +10,7 @@ if [[ -n "${PGP_KEY}" ]]; then
  else
      gpg --batch --import ${TMPFILE}
  fi
+ echo "Added GPG key"
 fi
 
 npmLogin() {
@@ -22,13 +22,16 @@ npmLogin() {
     local scope=$6
     if [[ -n "${user}" ]]; then
         local token=$(curl -s -H "Accept: application/json" -H "Content-Type:application/json" -X PUT --data "{\"name\": \"${user}\", \"password\": \"${pw}\"}" ${registry}-/user/org.couchdb.user:${user} 2>&1 | jq -r .token )
+        echo "Retrieved access token for npm registry: ${registry}"
     fi
     if [[ -n "${token}" ]]; then
         local reg=$(echo "${registry}" | sed "s/^http:/:/" | sed "s/^https://")
         if [[ -n "${scope}" ]]; then
             npm config set "${scope}:registry" ${registry}
+        echo "Added scope ${scope} for npm registry: ${registry}"
         fi
         npm config set "${reg}/:_authToken" ${token}
+        echo "Added access token for npm registry: ${registry}"
     fi
 }
 
