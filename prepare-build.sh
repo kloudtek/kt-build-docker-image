@@ -27,10 +27,10 @@ npmLogin() {
     if [[ -n "${token}" ]]; then
         local reg=$(echo "${registry}" | sed "s/^http://" | sed "s/^https://")
         if [[ -n "${scope}" ]]; then
-            echo >>~/.npmrc "${scope}:registry=${registry}"
+            npm config set "${scope}:registry" ${registry}
         echo "Added scope ${scope} for npm registry: ${registry}"
         fi
-        echo >>~/.npmrc "${reg}/:_authToken=${registry}"
+        npm config set "${reg}:_authToken" ${token}
         echo "Added access token for npm registry: ${registry}"
     fi
 }
