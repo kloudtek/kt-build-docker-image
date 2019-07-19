@@ -48,7 +48,7 @@ echo "***** INSTALLING PACKAGES *****"
 echo "*******************************"
 
 apt-get install -yq openjdk-8-jdk
-apt-get install -yq git gpg maven nodejs jq
+apt-get install -yq git gpg maven nodejs jq openssh-client
 
 echo "**************************************"
 echo "***** VERIFYING PACKAGE VERSIONS *****"

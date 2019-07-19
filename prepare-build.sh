@@ -13,6 +13,12 @@ if [[ -n "${PGP_KEY}" ]]; then
  echo "Added GPG key"
 fi
 
+if [[ -n "${SSH_KEY}" ]]; then
+    eval $(ssh-agent -s)
+    mkdir -p ~/.ssh
+    ssh-add <(echo "${SSH_KEY}")
+fi
+
 npmLogin() {
     local user=$1
     local pw=$2
