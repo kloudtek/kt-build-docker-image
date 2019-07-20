@@ -14,12 +14,14 @@ if [[ -n "${PGP_KEY}" ]]; then
 fi
 
 if [[ -n "${SSH_KEY}" ]]; then
+    echo  "Adding SSH key"
     eval $(ssh-agent -s)
     mkdir -p ~/.ssh
     ssh-add <(echo "${SSH_KEY}")
 fi
 
 if [[ -n "${MAVEN_REPO_ID}" ]]; then
+    echo  "Adding maven repository credentials"
     mkdir -p ~/.m2/
     echo >~/.m2/settings.xml "<settings xsi:schemaLocation=\"http://maven.apache.org/SETTINGS/1.1.0 http://maven.apache.org/xsd/settings-1.1.0.xsd\" xmlns=\"http://maven.apache.org/SETTINGS/1.1.0\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\">"
     echo >>~/.m2/settings.xml "<servers>"
