@@ -34,6 +34,26 @@ if [[ -n "${MAVEN_REPO_ID}" ]]; then
     echo >>~/.m2/settings.xml "</settings>"
 fi
 
+if [[ -n "${GITLAB_CI_TOKEN}" ]]; then
+    echo  "Adding gitlab maven repository CI job token"
+    mkdir -p ~/.m2/
+    echo >~/.m2/settings.xml "<settings xsi:schemaLocation=\"http://maven.apache.org/SETTINGS/1.1.0 http://maven.apache.org/xsd/settings-1.1.0.xsd\" xmlns=\"http://maven.apache.org/SETTINGS/1.1.0\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\">"
+    echo >>~/.m2/settings.xml "<servers>"
+    echo >>~/.m2/settings.xml "<server>"
+    echo >>~/.m2/settings.xml "<id>${GITLAB_CI_TOKEN}</id>"
+    echo >>~/.m2/settings.xml "<configuration>"
+    echo >>~/.m2/settings.xml "<httpHeaders>"
+    echo >>~/.m2/settings.xml "<property>"
+    echo >>~/.m2/settings.xml "<name>Job-Token</name>"
+    echo >>~/.m2/settings.xml "<value>${env.CI_JOB_TOKEN}</value>"
+    echo >>~/.m2/settings.xml "</property>"
+    echo >>~/.m2/settings.xml "</httpHeaders>"
+    echo >>~/.m2/settings.xml "</configuration>"
+    echo >>~/.m2/settings.xml "</server>"
+    echo >>~/.m2/settings.xml "</servers>"
+    echo >>~/.m2/settings.xml "</settings>"
+fi
+
 npmLogin() {
     local user=$1
     local pw=$2
