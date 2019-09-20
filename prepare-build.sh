@@ -20,6 +20,13 @@ if [[ -n "${SSH_KEY}" ]]; then
     ssh-add <(echo "${SSH_KEY}")
 fi
 
+if [[ -n "${SSH_KEY_FILE}" ]]; then
+    echo  "Copying key file to user home"
+    mkdir -p ~/.ssh/
+    cp ${SSH_KEY_FILE} ~/.ssh/id_rsa
+    chmod 700 ~/.ssh/id_rsa
+fi
+
 if [[ -n "${MAVEN_REPO_ID}" ]]; then
     echo  "Adding maven repository credentials"
     mkdir -p ~/.m2/
