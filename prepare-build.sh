@@ -45,7 +45,7 @@ if [[ -n "${GITLAB_CI_TOKEN}" ]]; then
     echo >>~/.m2/settings.xml "<httpHeaders>"
     echo >>~/.m2/settings.xml "<property>"
     echo >>~/.m2/settings.xml "<name>Job-Token</name>"
-    echo >>~/.m2/settings.xml "<value>${env.CI_JOB_TOKEN}</value>"
+    echo >>~/.m2/settings.xml "<value>\${env.CI_JOB_TOKEN}</value>"
     echo >>~/.m2/settings.xml "</property>"
     echo >>~/.m2/settings.xml "</httpHeaders>"
     echo >>~/.m2/settings.xml "</configuration>"
