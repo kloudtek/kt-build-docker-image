@@ -29,8 +29,8 @@ fi
 
 if [[ -n "${SSH_KNOWN_HOSTS}" ]]; then
     echo  "Adding known hosts"
-    - mkdir -p ~/.ssh
-    - echo "${SSH_KNOWN_HOSTS}" > ~/.ssh/known_hosts
+    mkdir -p ~/.ssh
+    echo "${SSH_KNOWN_HOSTS}" > ~/.ssh/known_hosts
 fi
 
 if [[ -n "${MAVEN_REPO_ID}" ]]; then
