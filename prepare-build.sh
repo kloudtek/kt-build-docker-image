@@ -33,25 +33,30 @@ if [[ -n "${SSH_KNOWN_HOSTS}" ]]; then
     echo "${SSH_KNOWN_HOSTS}" > ~/.ssh/known_hosts
 fi
 
+mkdir -p ~/.m2/
+echo >~/.m2/settings.xml "<settings xsi:schemaLocation=\"http://maven.apache.org/SETTINGS/1.1.0 http://maven.apache.org/xsd/settings-1.1.0.xsd\" xmlns=\"http://maven.apache.org/SETTINGS/1.1.0\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\">"
+echo >>~/.m2/settings.xml "<servers>"
+
 if [[ -n "${MAVEN_REPO_ID}" ]]; then
     echo  "Adding maven repository credentials"
-    mkdir -p ~/.m2/
-    echo >~/.m2/settings.xml "<settings xsi:schemaLocation=\"http://maven.apache.org/SETTINGS/1.1.0 http://maven.apache.org/xsd/settings-1.1.0.xsd\" xmlns=\"http://maven.apache.org/SETTINGS/1.1.0\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\">"
-    echo >>~/.m2/settings.xml "<servers>"
     echo >>~/.m2/settings.xml "<server>"
     echo >>~/.m2/settings.xml "<id>${MAVEN_REPO_ID}</id>"
     echo >>~/.m2/settings.xml "<username>${MAVEN_REPO_USER}</username>"
     echo >>~/.m2/settings.xml "<password>${MAVEN_REPO_PASS}</password>"
     echo >>~/.m2/settings.xml "</server>"
-    echo >>~/.m2/settings.xml "</servers>"
-    echo >>~/.m2/settings.xml "</settings>"
+fi
+
+if [[ -n "${MAVEN_REPO2_ID}" ]]; then
+    echo  "Adding maven repository credentials"
+    echo >>~/.m2/settings.xml "<server>"
+    echo >>~/.m2/settings.xml "<id>${MAVEN_REPO2_ID}</id>"
+    echo >>~/.m2/settings.xml "<username>${MAVEN_REPO2_USER}</username>"
+    echo >>~/.m2/settings.xml "<password>${MAVEN_REPO2_PASS}</password>"
+    echo >>~/.m2/settings.xml "</server>"
 fi
 
 if [[ -n "${GITLAB_MAVEN_JOBTOKEN}" ]]; then
     echo  "Adding gitlab maven repository CI job token"
-    mkdir -p ~/.m2/
-    echo >~/.m2/settings.xml "<settings xsi:schemaLocation=\"http://maven.apache.org/SETTINGS/1.1.0 http://maven.apache.org/xsd/settings-1.1.0.xsd\" xmlns=\"http://maven.apache.org/SETTINGS/1.1.0\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\">"
-    echo >>~/.m2/settings.xml "<servers>"
     echo >>~/.m2/settings.xml "<server>"
     echo >>~/.m2/settings.xml "<id>${GITLAB_MAVEN_JOBTOKEN}</id>"
     echo >>~/.m2/settings.xml "<configuration>"
@@ -63,9 +68,11 @@ if [[ -n "${GITLAB_MAVEN_JOBTOKEN}" ]]; then
     echo >>~/.m2/settings.xml "</httpHeaders>"
     echo >>~/.m2/settings.xml "</configuration>"
     echo >>~/.m2/settings.xml "</server>"
-    echo >>~/.m2/settings.xml "</servers>"
-    echo >>~/.m2/settings.xml "</settings>"
 fi
+
+echo >>~/.m2/settings.xml "</servers>"
+echo >>~/.m2/settings.xml "</settings>"
+
 
 npmLogin() {
     local user=$1
