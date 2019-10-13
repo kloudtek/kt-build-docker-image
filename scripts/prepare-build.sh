@@ -33,27 +33,26 @@ if [[ -n "${SSH_KNOWN_HOSTS}" ]]; then
     echo "${SSH_KNOWN_HOSTS}" > ~/.ssh/known_hosts
 fi
 
+mvnRepo() {
+    if [[ -n "$1" ]]; then
+        echo  "Adding maven repository credentials for repo $1"
+        echo >>~/.m2/settings.xml "<server>"
+        echo >>~/.m2/settings.xml "<id>$1</id>"
+        echo >>~/.m2/settings.xml "<username>$2</username>"
+        echo >>~/.m2/settings.xml "<password>$3</password>"
+        echo >>~/.m2/settings.xml "</server>"
+    fi
+}
+
 mkdir -p ~/.m2/
 echo >~/.m2/settings.xml "<settings xsi:schemaLocation=\"http://maven.apache.org/SETTINGS/1.1.0 http://maven.apache.org/xsd/settings-1.1.0.xsd\" xmlns=\"http://maven.apache.org/SETTINGS/1.1.0\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\">"
 echo >>~/.m2/settings.xml "<servers>"
 
-if [[ -n "${MAVEN_REPO_ID}" ]]; then
-    echo  "Adding maven repository credentials"
-    echo >>~/.m2/settings.xml "<server>"
-    echo >>~/.m2/settings.xml "<id>${MAVEN_REPO_ID}</id>"
-    echo >>~/.m2/settings.xml "<username>${MAVEN_REPO_USER}</username>"
-    echo >>~/.m2/settings.xml "<password>${MAVEN_REPO_PASS}</password>"
-    echo >>~/.m2/settings.xml "</server>"
-fi
-
-if [[ -n "${MAVEN_REPO2_ID}" ]]; then
-    echo  "Adding maven repository credentials"
-    echo >>~/.m2/settings.xml "<server>"
-    echo >>~/.m2/settings.xml "<id>${MAVEN_REPO2_ID}</id>"
-    echo >>~/.m2/settings.xml "<username>${MAVEN_REPO2_USER}</username>"
-    echo >>~/.m2/settings.xml "<password>${MAVEN_REPO2_PASS}</password>"
-    echo >>~/.m2/settings.xml "</server>"
-fi
+mvnRepo ${MAVEN_REPO_ID} ${MAVEN_REPO_USER} ${MAVEN_REPO_PASS}
+mvnRepo ${MAVEN_REPO_ID2} ${MAVEN_REPO_USER2} ${MAVEN_REPO_PASS2}
+mvnRepo ${MAVEN_REPO_ID3} ${MAVEN_REPO_USER3} ${MAVEN_REPO_PASS3}
+mvnRepo ${MAVEN_REPO_ID4} ${MAVEN_REPO_USER4} ${MAVEN_REPO_PASS4}
+mvnRepo ${MAVEN_REPO_ID5} ${MAVEN_REPO_USER5} ${MAVEN_REPO_PASS5}
 
 if [[ -n "${GITLAB_MAVEN_JOBTOKEN}" ]]; then
     echo  "Adding gitlab maven repository CI job token"
@@ -72,7 +71,6 @@ fi
 
 echo >>~/.m2/settings.xml "</servers>"
 echo >>~/.m2/settings.xml "</settings>"
-
 
 npmLogin() {
     local user=$1
@@ -99,3 +97,9 @@ npmLogin() {
 npmLogin "${NPM_USER}" "${NPM_PASS}" "${NPM_EMAIL}" "${NPM_TOKEN}" "${NPM_REGISTRY}" "${NPM_SCOPE}"
 npmLogin "${NPM_USER2}" "${NPM_PASS2}" "${NPM_EMAIL2}" "${NPM_TOKEN2}" "${NPM_REGISTRY2}" "${NPM_SCOPE2}"
 npmLogin "${NPM_USER3}" "${NPM_PASS3}" "${NPM_EMAIL3}" "${NPM_TOKEN3}" "${NPM_REGISTRY3}" "${NPM_SCOPE3}"
+
+if [[ -f pom.xml ]]; then
+    echo "Maven pom.xml file found"
+    export POM_VERSION=$( xmlstarlet sel -N 'p=http://maven.apache.org/POM/4.0.0' -t -v '/p:project/p:version/text()' pom.xml );
+    export POM_REL_VERSION=$( echo ${POM_VERSION} | sed 's/-SNAPSHOT$//' );
+fi
