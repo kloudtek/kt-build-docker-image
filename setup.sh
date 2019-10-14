@@ -67,6 +67,12 @@ echo "**********************************"
 
 npm install -g @angular/cli
 
+echo "**********************************"
+echo "***** INSTALLING OTHER BUILD TOOLS *****"
+echo "**********************************"
+
+npm install -g @adobe/jsonschema2md
+
 echo "***************************"
 echo "***** DELETING SCRIPT *****"
 echo "***************************"
