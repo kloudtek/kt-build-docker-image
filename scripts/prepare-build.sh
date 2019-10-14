@@ -13,6 +13,16 @@ if [[ -n "${PGP_KEY}" ]]; then
  echo "Added GPG key"
 fi
 
+if [[ -n "${GIT_USER_NAME}" ]]; then
+    git config --global user.email "${GIT_USER}"
+    echo "Added git user name"
+fi
+
+if [[ -n "${GIT_USER_EMAIL}" ]]; then
+    git config --global user.email "${GIT_USER}"
+    echo "Added git user email"
+fi
+
 if [[ -n "${SSH_KEY}" ]]; then
     echo  "Adding SSH key"
     eval $(ssh-agent -s)
