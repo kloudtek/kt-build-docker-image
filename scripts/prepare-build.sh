@@ -108,6 +108,14 @@ npmLogin "${NPM_USER}" "${NPM_PASS}" "${NPM_EMAIL}" "${NPM_TOKEN}" "${NPM_REGIST
 npmLogin "${NPM_USER2}" "${NPM_PASS2}" "${NPM_EMAIL2}" "${NPM_TOKEN2}" "${NPM_REGISTRY2}" "${NPM_SCOPE2}"
 npmLogin "${NPM_USER3}" "${NPM_PASS3}" "${NPM_EMAIL3}" "${NPM_TOKEN3}" "${NPM_REGISTRY3}" "${NPM_SCOPE3}"
 
+
+if [[ -n "${GL_NPM_TOKEN}" ]]; then
+    npmLogin "" "" "" "${GL_NPM_TOKEN}" "https://gitlab.com/api/v4/packages/npm/" "${GL_NPM_SCOPE}"
+    echo >>~/.npmrc "//gitlab.com/api/v4/projects/${CI_PROJECT_ID}/packages/npm/:_authToken=${GL_NPM_TOKEN}"
+    echo "Added gitlab npm repository"
+fi
+
+
 if [[ -f pom.xml ]]; then
     echo "Maven pom.xml file found"
     export POM_VERSION=$( xmlstarlet sel -N 'p=http://maven.apache.org/POM/4.0.0' -t -v '/p:project/p:version/text()' pom.xml );
