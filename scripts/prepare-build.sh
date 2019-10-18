@@ -64,10 +64,10 @@ mvnRepo ${MAVEN_REPO_ID3} ${MAVEN_REPO_USER3} ${MAVEN_REPO_PASS3}
 mvnRepo ${MAVEN_REPO_ID4} ${MAVEN_REPO_USER4} ${MAVEN_REPO_PASS4}
 mvnRepo ${MAVEN_REPO_ID5} ${MAVEN_REPO_USER5} ${MAVEN_REPO_PASS5}
 
-if [[ -n "${GITLAB_MAVEN_JOBTOKEN}" ]]; then
+if [[ "${GITLAB_CI}" == "true" ]]; then
     echo  "Adding gitlab maven repository CI job token"
     echo >>~/.m2/settings.xml "<server>"
-    echo >>~/.m2/settings.xml "<id>${GITLAB_MAVEN_JOBTOKEN}</id>"
+    echo >>~/.m2/settings.xml "<id>gitlab-maven</id>"
     echo >>~/.m2/settings.xml "<configuration>"
     echo >>~/.m2/settings.xml "<httpHeaders>"
     echo >>~/.m2/settings.xml "<property>"
