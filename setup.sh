@@ -5,7 +5,6 @@ set -e
 export DEBIAN_FRONTEND=noninteractive
 apt-get update
 
-
 # NPM Repo
 
 echo "***************************"
@@ -47,7 +46,7 @@ echo "*******************************"
 echo "***** INSTALLING PACKAGES *****"
 echo "*******************************"
 
-apt-get install -yq openjdk-8-jdk
+apt-get install -yq openjdk-12-jdk
 apt-get install -yq jekyll git gpg maven nodejs jq xmlstarlet openssh-client
 
 echo "**************************************"
