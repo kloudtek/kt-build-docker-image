@@ -119,7 +119,7 @@ if [[ -f pom.xml ]]; then
     export POM_VERSION=$( xmlstarlet sel -N 'p=http://maven.apache.org/POM/4.0.0' -t -v '/p:project/p:version/text()' pom.xml );
     export POM_REL_VERSION=$( echo ${POM_VERSION} | sed 's/-SNAPSHOT$//' );
     [[ "$POM_REL_VERSION" =~ (.*[^0-9])([0-9]+)$ ]] && export POM_NEXT_REL_VERSION="${BASH_REMATCH[1]}$((${BASH_REMATCH[2]} + 1))";
-    export POM_NEXT_VERSION = "${POM_NEXT_REL_VERSION}-SNAPSHOT"
+    export POM_NEXT_VERSION="${POM_NEXT_REL_VERSION}-SNAPSHOT"
     echo POM Version: ${POM_VERSION}
     echo POM Release Version: ${POM_REL_VERSION}
     echo POM Next Version: ${POM_NEXT_VERSION}
