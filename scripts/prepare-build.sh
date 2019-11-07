@@ -125,3 +125,5 @@ if [[ -f pom.xml ]]; then
     echo POM Next Version: ${POM_NEXT_VERSION}
     echo POM Next Release Version: ${POM_NEXT_REL_VERSION}
 fi
+
+export JAVA_HOME=/usr/lib/jvm/java-12-openjdk-amd64
