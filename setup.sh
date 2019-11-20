@@ -47,7 +47,7 @@ echo "***** INSTALLING PACKAGES *****"
 echo "*******************************"
 
 apt-get install -yq openjdk-12-jdk
-apt-get install -yq jekyll git gpg maven nodejs jq xmlstarlet openssh-client ruby-bundler
+apt-get install -yq jekyll git gpg maven nodejs jq xmlstarlet openssh-client rake
 
 echo "**************************************"
 echo "***** VERIFYING PACKAGE VERSIONS *****"
