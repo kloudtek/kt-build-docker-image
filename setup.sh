@@ -60,6 +60,15 @@ npm --version
 
 # Install angular cli
 
+echo "******************************"
+echo "***** INSTALLING AWS CLI *****"
+echo "******************************"
+
+curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+unzip awscliv2.zip
+aws/install -b /bin
+rm -rf aws
+
 echo "**********************************"
 echo "***** INSTALLING ANGULAR CLI *****"
 echo "**********************************"

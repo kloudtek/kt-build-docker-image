@@ -43,6 +43,17 @@ if [[ -n "${SSH_KNOWN_HOSTS}" ]]; then
     echo "${SSH_KNOWN_HOSTS}" > ~/.ssh/known_hosts
 fi
 
+if [[ -n "${AWS_KEY_ACCESS}" ]]; then
+    echo  "Adding AWS Configuration"
+    mkdir -p ~/.aws
+    echo "[default]" > ~/.aws/config
+    echo "region = us-west-2" >> ~/.aws/config
+    echo "output = None" >> ~/.aws/config
+    echo "[default]" > ~/.aws/credentials
+    echo "aws_access_key_id=${AWS_KEY_ID}" >> ~/.aws/credentials
+    echo "aws_secret_access_key=${AWS_KEY_SECRET}" >> ~/.aws/credentials
+fi
+
 mvnRepo() {
     if [[ -n "$1" ]]; then
         echo  "Adding maven repository credentials for repo $1"
