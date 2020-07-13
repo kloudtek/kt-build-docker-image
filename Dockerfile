@@ -1,4 +1,4 @@
-FROM ubuntu:19.04
+FROM ubuntu:20.04
 
 ENV TZONE=America/Los_Angeles
 ENV LANG=C.UTF-8
