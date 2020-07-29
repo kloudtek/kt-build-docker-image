@@ -55,6 +55,8 @@ echo "**************************************"
 
 echo "- JDK -"
 readlink -f $(which java)
+java --version
+
 echo "- NPM -"
 npm --version
 
