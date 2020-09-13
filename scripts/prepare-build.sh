@@ -48,9 +48,8 @@ if [[ -n "${AWS_KEY_ACCESS}" ]]; then
     mkdir -p ~/.aws
     echo "[default]" > ~/.aws/config
     echo "region = us-west-2" >> ~/.aws/config
-    echo "output = None" >> ~/.aws/config
     echo "[default]" > ~/.aws/credentials
-    echo "aws_access_key_id=${AWS_KEY_ID}" >> ~/.aws/credentials
+    echo "aws_access_key_id=${AWS_KEY_ACCESS}" >> ~/.aws/credentials
     echo "aws_secret_access_key=${AWS_KEY_SECRET}" >> ~/.aws/credentials
 fi
 
