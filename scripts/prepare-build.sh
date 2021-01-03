@@ -2,6 +2,11 @@
 
 echo "Preparing build"
 
+if [[ -n "${GITHUB_TOKEN}" ]]; then
+  echo "Github token found, logging on via gh"
+  echo "${GITHUB_TOKEN}" | gh auth login --with-token
+fi
+
 if [[ -n "${PGP_KEY}" ]]; then
  TMPFILE=$(mktemp)
  echo >${TMPFILE} "${PGP_KEY}"
@@ -137,10 +142,3 @@ if [[ -f pom.xml ]]; then
 fi
 
 export JAVA_HOME=/usr/lib/jvm/java-13-openjdk-amd64
-
-echo Install github CLI
-
-sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-key C99B11DEB97541F0
-sudo apt-add-repository https://cli.github.com/packages
-sudo apt update
-sudo apt install gh

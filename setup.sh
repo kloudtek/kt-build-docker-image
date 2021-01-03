@@ -3,6 +3,7 @@
 set -e
 
 export DEBIAN_FRONTEND=noninteractive
+
 apt-get update
 
 # NPM Repo
@@ -77,9 +78,19 @@ echo "**********************************"
 
 npm install -g @angular/cli
 
-echo "**********************************"
+echo "*********************************"
+echo "***** INSTALLING GITHUB CLI *****"
+echo "*********************************"
+
+apt-get install -yq software-properties-common
+apt-key adv --keyserver keyserver.ubuntu.com --recv-key C99B11DEB97541F0
+apt-add-repository https://cli.github.com/packages
+apt update
+apt install -yq gh
+
+echo "****************************************"
 echo "***** INSTALLING OTHER BUILD TOOLS *****"
-echo "**********************************"
+echo "****************************************"
 
 npm install -g @adobe/jsonschema2md
 
